@@ -175,7 +175,7 @@
 </template>
 
 <script>
-  import axios from 'axios'
+  import axios from 'http-commons'
   export  default {
     name: 'Coach',
     data: () => ({
