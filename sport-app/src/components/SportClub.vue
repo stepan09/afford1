@@ -119,25 +119,25 @@
       },
       methods: {
         fetchSportClubs() {
-          axios.get('http://localhost:8080/api/sport-clubs').then((response) => {
+          axios.get('/api/sport-clubs').then((response) => {
             this.sportClubs = response.data;
           });
         },
         deleteSportClub(id) {
-          axios.delete('http://localhost:8080/api/sport-clubs/' + id).then(() => {
+          axios.delete('/api/sport-clubs/' + id).then(() => {
             this.fetchSportClubs();
           });
         },
         addSportClub() {
           this.showModal = false;
-          axios.post('http://localhost:8080/api/sport-clubs/', this.formAdd).then(() => {
+          axios.post('/api/sport-clubs/', this.formAdd).then(() => {
             this.fetchSportClubs();
           });
           this.formAdd = {};
         },
         updateSportClub(sportClub) {
           this.showUpdateModal = false;
-          axios.put('http://localhost:8080/api/sport-clubs/' + sportClub.sportClubId, sportClub).then(() => {
+          axios.put('/api/sport-clubs/' + sportClub.sportClubId, sportClub).then(() => {
             this.fetchSportClubs();
           });
           this.formAdd = {};

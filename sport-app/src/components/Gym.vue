@@ -129,26 +129,26 @@
       },
       methods: {
         fetchGyms() {
-          axios.get('http://localhost:8080/api/gyms').then((response) => {
+          axios.get('/api/gyms').then((response) => {
             this.gyms = response.data;
           })
         },
         addGym() {
           this.showModal = false;
-          axios.post('http://localhost:8080/api/gyms/', this.formAdd).then(() => {
+          axios.post('/api/gyms/', this.formAdd).then(() => {
             this.fetchGyms();
           });
           this.formAdd = {};
         },
         updateGym(gym) {
           this.showUpdateModal = false;
-          axios.put('http://localhost:8080/api/gyms/' + gym.gymId, gym).then(() => {
+          axios.put('/api/gyms/' + gym.gymId, gym).then(() => {
             this.fetchGyms();
           });
           this.formAdd = {};
         },
         deleteGym(id) {
-          axios.delete('http://localhost:8080/api/gyms/' + id).then(() => {
+          axios.delete('/api/gyms/' + id).then(() => {
             this.fetchGyms();
           });
         },

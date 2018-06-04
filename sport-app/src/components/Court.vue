@@ -140,18 +140,18 @@
       },
       methods: {
         fetchCourts() {
-          axios.get('http://localhost:8080/api/courts').then((response) => {
+          axios.get('/api/courts').then((response) => {
             this.courts = response.data;
           });
         },
         deleteCourt(id) {
-          axios.delete('http://localhost:8080/api/courts/' + id).then(() => {
+          axios.delete('/api/courts/' + id).then(() => {
             this.fetchCourts();
           });
         },
         addCourt() {
           this.showModal = false;
-          axios.post('http://localhost:8080/api/courts/', this.formAdd).then(() => {
+          axios.post('/api/courts/', this.formAdd).then(() => {
             this.fetchCourts();
           });
           this.formAdd = {};
@@ -159,7 +159,7 @@
         updateCourt(court) {
           this.showUpdateModal = false;
           console.log(this.formAdd);
-          axios.put('http://localhost:8080/api/courts/' + court.courtId, court).then(() => {
+          axios.put('/api/courts/' + court.courtId, court).then(() => {
             this.fetchCourts();
           });
           this.formAdd = {};

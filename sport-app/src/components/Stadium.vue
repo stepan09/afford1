@@ -220,55 +220,55 @@
       },
       methods: {
         fetchStadiums() {
-          axios.get('http://localhost:8080/api/stadiums').then((response) => {
+          axios.get('/api/stadiums').then((response) => {
             this.stadiums = response.data;
           });
         },
         fetchSportKinds() {
-          axios.get('http://localhost:8080/api/sport-kinds').then((response) => {
+          axios.get('/api/sport-kinds').then((response) => {
             this.sportKinds = response.data;
           })
         },
         getStadiumWithCapacityGreaterThan() {
-          axios.get('http://localhost:8080/api/stadiums-greater/' + this.capacity).then((response) => {
+          axios.get('/api/stadiums-greater/' + this.capacity).then((response) => {
             this.stadiums = response.data;
           })
         },
         getStadiumWithTreadmill() {
-          axios.get('http://localhost:8080/api/stadiums-treadmill').then((response) => {
+          axios.get('/api/stadiums-treadmill').then((response) => {
             this.stadiums = response.data;
           })
         },
         getStadiumOrderByCapacityDesc() {
-          axios.get('http://localhost:8080/api/stadiums-order-desc').then((response) => {
+          axios.get('/api/stadiums-order-desc').then((response) => {
             this.stadiums = response.data;
           })
         },
         getStadiumOrderByCapacityAsc() {
-          axios.get('http://localhost:8080/api/stadiums-order-asc').then((response) => {
+          axios.get('/api/stadiums-order-asc').then((response) => {
             this.stadiums = response.data;
           })
         },
         getStadiumsByKindOfSportAndDates(sportKindId, firstDate, secondDate) {
-          axios.get('http://localhost:8080/api/stadiums/' + sportKindId + '/' + firstDate + '/' + secondDate).then((response) => {
+          axios.get('/api/stadiums/' + sportKindId + '/' + firstDate + '/' + secondDate).then((response) => {
             this.stadiums = response.data;
           });
         },
         deleteStadium(id) {
-          axios.delete('http://localhost:8080/api/stadiums/' + id).then(() => {
+          axios.delete('/api/stadiums/' + id).then(() => {
             this.fetchStadiums();
           });
         },
         addStadium() {
           this.showModal = false;
-          axios.post('http://localhost:8080/api/stadiums/', this.formAdd).then(() => {
+          axios.post('/api/stadiums/', this.formAdd).then(() => {
             this.fetchStadiums();
           });
           this.formAdd = {};
         },
         updateStadium(stadium) {
           this.showUpdateModal = false;
-          axios.put('http://localhost:8080/api/stadiums/' + stadium.stadiumId, stadium).then(() => {
+          axios.put('/api/stadiums/' + stadium.stadiumId, stadium).then(() => {
             this.fetchStadiums();
           });
           this.formAdd = {};

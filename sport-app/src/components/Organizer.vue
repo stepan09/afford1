@@ -154,42 +154,42 @@
       },
       methods: {
         fetchOrganizers() {
-          axios.get('http://localhost:8080/api/organizers').then((response) => {
+          axios.get('/api/organizers').then((response) => {
             this.organizers = response.data;
           })
         },
         fetchCompetitions() {
-          axios.get('http://localhost:8080/api/competitions').then((response) => {
+          axios.get('/api/competitions').then((response) => {
             this.competitions = response.data;
           })
         },
         fetchCountCompetitions(organizerId) {
-          axios.get('http://localhost:8080/api/competition-count/' + organizerId).then((response) => {
+          axios.get('/api/competition-count/' + organizerId).then((response) => {
             return response.data;
             //console.log(this.count);
           });
         },
         addOrganizer() {
           this.showModal = false;
-          axios.post('http://localhost:8080/api/organizers', this.formAdd).then(() => {
+          axios.post('/api/organizers', this.formAdd).then(() => {
             this.fetchOrganizers();
           });
           this.formAdd = {};
         },
         updateOrganizer(organizer) {
           this.showUpdateModal = false;
-          axios.put('http://localhost:8080/api/organizers/' + organizer.organizerId, this.formAdd).then(() => {
+          axios.put('/api/organizers/' + organizer.organizerId, this.formAdd).then(() => {
             this.fetchOrganizers();
           });
           this.formAdd = {};
         },
         deleteOrganizer(id) {
-          axios.delete('http://localhost:8080/api/organizers/' + id).then(() => {
+          axios.delete('/api/organizers/' + id).then(() => {
             this.fetchOrganizers();
           });
         },
         getOrganizerByCompetition(competitionId) {
-          axios.get('http://localhost:8080/api/organizers-by-competition/' + competitionId).then((response) => {
+          axios.get('/api/organizers-by-competition/' + competitionId).then((response) => {
             this.organizers = response.data;
           })
         },

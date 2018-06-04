@@ -108,18 +108,18 @@
       },
       methods: {
         fetchSportKinds() {
-          axios.get('http://localhost:8080/api/sport-kinds').then((response) => {
+          axios.get('/api/sport-kinds').then((response) => {
             this.sportKinds = response.data;
           });
         },
         deleteSportKind(id) {
-          axios.delete('http://localhost:8080/api/sport-kinds/' + id).then(() => {
+          axios.delete('/api/sport-kinds/' + id).then(() => {
             this.fetchSportKinds();
           });
         },
         addSportKind() {
           this.showModal = false;
-          axios.post('http://localhost:8080/api/sport-kinds/', this.formAdd).then(() => {
+          axios.post('/api/sport-kinds/', this.formAdd).then(() => {
             this.fetchSportKinds();
           });
           this.formAdd = {};
@@ -127,7 +127,7 @@
         updateSportKind(sportKind) {
           this.showUpdateModal = false;
           console.log(this.formAdd);
-          axios.put('http://localhost:8080/api/sport-kinds/' + sportKind.id, sportKind).then(() => {
+          axios.put('/api/sport-kinds/' + sportKind.id, sportKind).then(() => {
             this.fetchSportKinds();
           });
           this.formAdd = {};
