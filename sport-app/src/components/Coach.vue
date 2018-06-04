@@ -175,7 +175,7 @@
 </template>
 
 <script>
-  import {AXIOS} from './http-commons'
+  import axios from 'axios'
   export  default {
     name: 'Coach',
     data: () => ({
@@ -194,35 +194,35 @@
     },
     methods: {
       fetchCoaches() {
-        AXIOS.get('http://localhost:8080/api/coaches').then((response) => {
+        axios.get('http://localhost:8080/api/coaches').then((response) => {
           this.coaches = response.data;
         })
       },
       fetchSportsmen() {
-        AXIOS.get('http://localhost:8080/api/sportsmen').then((response) => {
+        axios.get('http://localhost:8080/api/sportsmen').then((response) => {
           this.sportsmen = response.data;
         })
       },
       getCoachesBySportsmanId(sportsmanId) {
-        AXIOS.get('http://localhost:8080/api/coaches-by-sportsman/' + sportsmanId).then((response) => {
+        axios.get('http://localhost:8080/api/coaches-by-sportsman/' + sportsmanId).then((response) => {
           this.coaches = response.data;
         })
       },
       deleteCoach(id) {
-        AXIOS.delete('http://localhost:8080/api/coaches/' + id).then(() => {
+        axios.delete('http://localhost:8080/api/coaches/' + id).then(() => {
           this.fetchCoaches();
         })
       },
       addCoach() {
         this.showModal = false;
-        AXIOS.post('http://localhost:8080/api/coaches/', this.formAdd).then(() => {
+        axios.post('http://localhost:8080/api/coaches/', this.formAdd).then(() => {
           this.fetchCoaches();
         });
         this.formAdd = {};
       },
       updateCoach(coach) {
         this.showUpdateModal = false;
-        AXIOS.put('http://localhost:8080/api/coaches/' + coach.coachId, coach).then(() => {
+        axios.put('http://localhost:8080/api/coaches/' + coach.coachId, coach).then(() => {
           this.fetchCoaches();
         });
         this.formAdd = {};
