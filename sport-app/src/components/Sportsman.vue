@@ -251,7 +251,7 @@
       },
       methods: {
         fetchSportsmen() {
-          axios.get('http://localhost:8080/api/sportsmen').then((response) => {
+          axios.get('https://localhost:8080/api/sportsmen').then((response) => {
             this.sportsmen = response.data;
           })
         },
