@@ -194,35 +194,35 @@
     },
     methods: {
       fetchCoaches() {
-        axios.get('http://localhost:8080/api/coaches').then((response) => {
+        axios.get('/api/coaches').then((response) => {
           this.coaches = response.data;
         })
       },
       fetchSportsmen() {
-        axios.get('http://localhost:8080/api/sportsmen').then((response) => {
+        axios.get('/api/sportsmen').then((response) => {
           this.sportsmen = response.data;
         })
       },
       getCoachesBySportsmanId(sportsmanId) {
-        axios.get('http://localhost:8080/api/coaches-by-sportsman/' + sportsmanId).then((response) => {
+        axios.get('/api/coaches-by-sportsman/' + sportsmanId).then((response) => {
           this.coaches = response.data;
         })
       },
       deleteCoach(id) {
-        axios.delete('http://localhost:8080/api/coaches/' + id).then(() => {
+        axios.delete('/api/coaches/' + id).then(() => {
           this.fetchCoaches();
         })
       },
       addCoach() {
         this.showModal = false;
-        axios.post('http://localhost:8080/api/coaches/', this.formAdd).then(() => {
+        axios.post('/api/coaches/', this.formAdd).then(() => {
           this.fetchCoaches();
         });
         this.formAdd = {};
       },
       updateCoach(coach) {
         this.showUpdateModal = false;
-        axios.put('http://localhost:8080/api/coaches/' + coach.coachId, coach).then(() => {
+        axios.put('/api/coaches/' + coach.coachId, coach).then(() => {
           this.fetchCoaches();
         });
         this.formAdd = {};
