@@ -19,8 +19,6 @@
     <properties>
         <main.basedir>${project.basedir}</main.basedir>
         <!-- Analysis Tools for CI -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <build-plugin.jacoco.version>0.7.9</build-plugin.jacoco.version>
         <build-plugin.coveralls.version>4.3.0</build-plugin.coveralls.version>
     </properties>

@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar sport/target/sport-2.0.1.RELEASE.jar -Dfile.encoding=UTF-8
+web: java -Dserver.port=$PORT -Dfile.encoding=UTF-8 -jar sport/target/sport-2.0.1.RELEASE.jar
