@@ -194,7 +194,7 @@
     },
     methods: {
       fetchCoaches() {
-        AXIOS.get('https://localhost:8080/api/coaches').then((response) => {
+        AXIOS.get('http://localhost:8080/api/coaches').then((response) => {
           this.coaches = response.data;
         })
       },
