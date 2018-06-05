@@ -127,7 +127,11 @@
                     </select>
                   </div>
                   <button class="btn btn-default" @click="showModal=false">Скасувати</button>
-                  <button class="btn btn-success" @click="addSportsman">Зберегти</button>
+                  <button v-if="formAdd.lastName !== '' && formAdd.firstName !== '' &&
+                                formAdd.middleName !== '' && formAdd.birthDate !== undefined &&
+                                formAdd.sportClub !== undefined"
+                          class="btn btn-success" @click="addSportsman">Зберегти</button>
+                  <button v-else class="btn btn-success" disabled>Зберегти</button>
                 </div>
               </div>
             </div>
@@ -189,7 +193,11 @@
                     </select>
                   </div>
                   <button class="btn btn-default" @click="showUpdateModal=false">Скасувати</button>
-                  <button class="btn btn-success" @click="updateSportsman(formAdd)">Зберегти</button>
+                  <button v-if="formAdd.lastName !== '' && formAdd.firstName !== '' &&
+                                formAdd.middleName !== '' && formAdd.birthDate !== undefined &&
+                                formAdd.sportClub !== undefined"
+                          class="btn btn-success" @click="updateSportsman(formAdd)">Зберегти</button>
+                  <button v-else class="btn btn-success" disabled>Зберегти</button>
                   </div>
                 </div>
               </div>
@@ -297,7 +305,7 @@
         },
         addSportsman() {
           this.showModal = false;
-          axios.post('/api/sportsmen/', this.formAdd).then(() => {
+          axios.post('api/sportsmen/', this.formAdd).then(() => {
             this.fetchSportsmen();
           });
           this.formAdd = {};
@@ -309,7 +317,7 @@
         },
         updateSportsman(sportsman) {
           this.showUpdateModal = false;
-          axios.put('/api/sportsmen/' + sportsman.sportsmanId, sportsman).then(() => {
+          axios.put('api/sportsmen/' + sportsman.sportsmanId, sportsman).then(() => {
             fetchSportsmen();
           });
           this.formAdd = {};

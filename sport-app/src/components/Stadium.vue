@@ -127,7 +127,11 @@
                   </div>
 
                   <button class="btn btn-default" @click="showModal=false">Скасувати</button>
-                  <button class="btn btn-success" @click="addStadium" >Зберегти</button>
+                  <button v-if="formAdd.name !== '' && formAdd.foundationDate !== undefined &&
+                                formAdd.address !== '' && formAdd.capacity !== undefined &&
+                                formAdd.treadmill !== undefined"
+                          class="btn btn-success" @click="addStadium" >Зберегти</button>
+                  <button class="btn btn-success" disabled>Зберегти</button>
 
                 </div>
               </div>
@@ -179,8 +183,12 @@
                   </div>
 
                   <button class="btn btn-default" @click="showUpdateModal=false">Скасувати</button>
-                  <button class="btn btn-success" @click="updateStadium(formAdd)">Зберегти</button>
-
+                  <button class="btn btn-default" @click="showModal=false">Скасувати</button>
+                  <button v-if="formAdd.name !== '' && formAdd.foundationDate !== undefined &&
+                                formAdd.address !== '' && formAdd.capacity !== undefined &&
+                                formAdd.treadmill !== undefined"
+                          class="btn btn-success" @click="updateStadium(formAdd)" >Зберегти</button>
+                  <button class="btn btn-success" disabled>Зберегти</button>
                 </div>
               </div>
             </div>

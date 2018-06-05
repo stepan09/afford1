@@ -78,7 +78,9 @@
                     </div>
 
                     <button class="btn btn-default" @click="showModal=false">Скасувати</button>
-                    <button class="btn btn-success" @click="addOrganizer">Зберегти</button>
+                    <button v-if="formAdd.lastName !== '' && formAdd.firstName !== ''"
+                            class="btn btn-success" @click="addOrganizer">Зберегти</button>
+                    <button class="btn btn-success" disabled>Зберегти</button>
 
                   </div>
                 </div>
@@ -119,7 +121,9 @@
                     </div>
 
                     <button class="btn btn-default" @click="showUpdateModal=false">Скасувати</button>
-                    <button class="btn btn-success" @click="updateOrganizer(formAdd)">Зберегти</button>
+                    <button v-if="formAdd.lastName !== '' && formAdd.firstName !== ''"
+                            class="btn btn-success" @click="updateOrganizer(formAdd)">Зберегти</button>
+                    <button class="btn btn-success" disabled>Зберегти</button>
 
                   </div>
                 </div>
@@ -150,7 +154,6 @@
       created() {
         this.fetchOrganizers();
         this.fetchCompetitions();
-        //this.fetchCountCompetitions(1);
       },
       methods: {
         fetchOrganizers() {

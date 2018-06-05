@@ -61,11 +61,14 @@
 
                   <div class="form-group">
                     <label>Тип покриття</label>
-                    <input v-model="formAdd.coverType" type="text" class="form-control" placeholder="Введіть вмістимість">
+                    <input v-model="formAdd.coverType" type="text" class="form-control" placeholder="Введіть тип покриття">
                   </div>
 
                   <button class="btn btn-default" @click="showModal=false">Скасувати</button>
-                  <button class="btn btn-success" @click="addCourt">Зберегти</button>
+                  <button v-if="formAdd.name !== '' && formAdd.foundationDate !== undefined &&
+                                formAdd.address !== '' && formAdd.coverType !== ''"
+                          class="btn btn-success" @click="addCourt">Зберегти</button>
+                  <button v-else class="btn btn-success" disabled>Зберегти</button>
 
                 </div>
               </div>
@@ -107,11 +110,14 @@
 
                   <div class="form-group">
                     <label>Тип покриття</label>
-                    <input v-model="formAdd.coverType" type="text" class="form-control" placeholder="Введіть вмістимість">
+                    <input v-model="formAdd.coverType" type="text" class="form-control" placeholder="Введіть тип покриття">
                   </div>
 
                   <button class="btn btn-default" @click="showUpdateModal=false">Скасувати</button>
-                  <button class="btn btn-success" @click="updateCourt(formAdd)">Зберегти</button>
+                  <button v-if="formAdd.name !== '' && formAdd.foundationDate !== undefined &&
+                                formAdd.address !== '' && formAdd.coverType !== ''"
+                          class="btn btn-success" @click="updateCourt(formAdd)">Зберегти</button>
+                  <button v-else class="btn btn-success" disabled>Зберегти</button>
 
                 </div>
               </div>

@@ -58,7 +58,7 @@
 
                   <div class="form-group">
                     <label>Прізвище</label>
-                    <input v-model="formAdd.lastName" type="text" pattern="^[0-9]+$" class="form-control" placeholder="Введіть прізвище">
+                    <input v-model="formAdd.lastName" type="text" class="form-control" placeholder="Введіть прізвище">
                   </div>
 
                   <div class="form-group">
@@ -85,7 +85,11 @@
                     </select>
                   </div>
                   <button class="btn btn-default" @click="showModal=false">Скасувати</button>
-                  <button type="submit" class="btn btn-success" @click="addCoach">Зберегти</button>
+                  <button v-if="formAdd.lastName !== undefined && formAdd.firstName !== undefined && formAdd.middleName
+                   !== undefined && formAdd.birthDate !== undefined"
+                          class="btn btn-success" @click="addCoach">Зберегти</button>
+
+                  <button v-else class="btn btn-success" @click="addCoach" disabled>Зберегти</button>
 
                 </div>
               </div>
@@ -142,7 +146,11 @@
                     </select>
                   </div>
                   <button class="btn btn-default" @click="showUpdateModal=false">Скасувати</button>
-                  <button class="btn btn-success" @click="updateCoach(formAdd)">Зберегти</button>
+                  <button v-if="formAdd.lastName !== undefined && formAdd.firstName !== undefined && formAdd.middleName
+                   !== undefined && formAdd.birthDate !== undefined"
+                          class="btn btn-success" @click="updateCoach(formAdd)">Зберегти</button>
+
+                  <button v-else class="btn btn-success" disabled>Зберегти</button>
 
                 </div>
               </div>
@@ -214,6 +222,7 @@
         })
       },
       addCoach() {
+        console.log(this.formAdd.lastName);
         this.showModal = false;
         axios.post('/api/coaches/', this.formAdd).then(() => {
           this.fetchCoaches();

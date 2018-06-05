@@ -224,7 +224,7 @@
 
                 <div class="form-group">
                   <label>Назва</label>
-                  <input v-model="formAdd.name" type="text" class="form-control" placeholder="Введіть прізвище">
+                  <input v-model="formAdd.name" type="text" class="form-control" placeholder="Введіть назву">
                 </div>
 
                 <div class="form-group">
@@ -292,7 +292,11 @@
                 </div>
 
                 <button class="btn btn-default" @click="showModal=false">Скасувати</button>
-                <button class="btn btn-success" @click="addCompetition">Зберегти</button>
+                <button v-if="formAdd.name !== undefined && formAdd.startDate !== undefined &&
+                              formAdd.finishDate !== undefined && formAdd.organizer !== undefined &&
+                              formAdd.sportKind !== undefined"
+                        class="btn btn-success" @click="addCompetition">Зберегти</button>
+                <button v-else class="btn btn-success" disabled>Зберегти</button>
               </div>
             </div>
           </div>
@@ -318,7 +322,7 @@
 
                 <div class="form-group">
                   <label>Назва</label>
-                  <input v-model="formAdd.name" type="text" class="form-control" placeholder="Введіть прізвище">
+                  <input v-model="formAdd.name" type="text" class="form-control" placeholder="Введіть назву">
                 </div>
 
                 <div class="form-group">
@@ -386,7 +390,11 @@
                 </div>
 
                 <button class="btn btn-default" @click="showUpdateModal=false">Скасувати</button>
-                <button class="btn btn-success" @click="updateCompetition(formAdd)">Зберегти</button>
+                <button v-if="formAdd.name !== undefined && formAdd.startDate !== undefined &&
+                              formAdd.finishDate !== undefined && formAdd.organizer !== undefined &&
+                              formAdd.sportKind !== undefined"
+                        class="btn btn-success" @click="updateCompetition(formAdd)">Зберегти</button>
+                <button v-else class="btn btn-success" disabled>Зберегти</button>
               </div>
             </div>
           </div>
@@ -474,7 +482,7 @@
         },
         addCompetition() {
           this.showModal = false;
-          axios.post('http://localhost:8080/api/competitions/', this.formAdd).then(() => {
+          axios.post('/api/competitions/', this.formAdd).then(() => {
             this.fetchCompetitions();
           });
           this.formAdd = {};

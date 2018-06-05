@@ -53,7 +53,9 @@
                   </div>
 
                   <button class="btn btn-default" @click="showModal=false">Скасувати</button>
-                  <button class="btn btn-success" @click="addSportClub">Зберегти</button>
+                  <button v-if="formAdd.name !== '' && formAdd.foundationDate !== undefined"
+                          class="btn btn-success" @click="addSportClub">Зберегти</button>
+                  <button v-else class="btn btn-success" disabled>Зберегти</button>
 
                 </div>
               </div>
@@ -89,7 +91,9 @@
                   </div>
 
                   <button class="btn btn-default" @click="showUpdateModal=false">Скасувати</button>
-                  <button class="btn btn-success" @click="updateSportClub(formAdd)">Зберегти</button>
+                  <button v-if="formAdd.name !== '' && formAdd.foundationDate !== undefined"
+                          class="btn btn-success" @click="updateSportClub(formAdd)">Зберегти</button>
+                  <button v-else class="btn btn-success" disabled>Зберегти</button>
 
                 </div>
               </div>

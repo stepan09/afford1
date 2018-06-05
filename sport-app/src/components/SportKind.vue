@@ -47,7 +47,8 @@
                   </div>
 
                   <button class="btn btn-default" @click="showModal=false">Скасувати</button>
-                  <button class="btn btn-success" @click="addSportKind">Зберегти</button>
+                  <button v-if="formAdd.name !== ''" class="btn btn-success" @click="addSportKind">Зберегти</button>
+                  <button v-else class="btn btn-success" disabled>Зберегти</button>
 
                 </div>
               </div>
