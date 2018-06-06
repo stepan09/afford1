@@ -22,21 +22,40 @@ public class OrganizerController {
     @Autowired
     private OrganizerRepository organizerRepository;
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/organizers")
     public List<Organizer> getAllOrganizers(){
         return organizerRepository.findAll();
     }
 
+    /**
+     *
+     * @param competitionId
+     * @return
+     */
     @GetMapping("/organizers-by-competition/{competitionId}")
     public List<Organizer> getOrganizersByCompetition(@PathVariable(value = "competitionId") Long competitionId) {
         return organizerRepository.findByCompetitions_CompetitionId(competitionId);
     }
 
+    /**
+     *
+     * @param organizer
+     * @return
+     */
     @PostMapping("/organizers")
     public Organizer createOrganizer(@Valid @RequestBody Organizer organizer) {
         return organizerRepository.save(organizer);
     }
 
+    /**
+     *
+     * @param organizerId
+     * @return
+     */
     @GetMapping("/organizers/{id}")
     public Organizer getOrganizerById(@PathVariable(value = "id") Long organizerId) {
         return organizerRepository.findById(organizerId)
@@ -44,6 +63,12 @@ public class OrganizerController {
 
     }
 
+    /**
+     *
+     * @param organizerId
+     * @param organizerDetails
+     * @return
+     */
     @PutMapping("/organizers/{id}")
     public Organizer updateOrganizer(@PathVariable(value = "id") Long organizerId,
                                      @Valid @RequestBody Organizer organizerDetails) {
@@ -59,6 +84,11 @@ public class OrganizerController {
         return updateOrganizer;
     }
 
+    /**
+     *
+     * @param organizerId
+     * @return
+     */
     @DeleteMapping("/organizers/{id}")
     public ResponseEntity<?> deleteOrganizer(@PathVariable(value = "id") Long organizerId) {
         Organizer organizer = organizerRepository.findById(organizerId)

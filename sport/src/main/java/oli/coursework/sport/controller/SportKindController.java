@@ -22,22 +22,42 @@ public class SportKindController {
     @Autowired
     private SportKindRepository sportKindRepository;
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/sport-kinds")
     public List<SportKind> getAllSportKinds(){
         return sportKindRepository.findAll();
     }
 
+    /**
+     *
+     * @param sportKind
+     * @return
+     */
     @PostMapping("/sport-kinds")
     public SportKind createSportKind(@Valid @RequestBody SportKind sportKind) {
         return sportKindRepository.save(sportKind);
     }
 
+    /**
+     *
+     * @param sportKindId
+     * @return
+     */
     @GetMapping("/sport-kinds/{id}")
     public SportKind getSportKidById(@PathVariable(value = "id") Long sportKindId) {
         return sportKindRepository.findById(sportKindId)
                 .orElseThrow(() -> new ResourceNotFoundException("Sport kind", "id", sportKindId));
     }
 
+    /**
+     *
+     * @param sportKindId
+     * @param sportKindDetails
+     * @return
+     */
     @PutMapping("sport-kinds/{id}")
     public SportKind updateSportKind(@PathVariable(value = "id") Long sportKindId,
                                      @Valid @RequestBody SportKind sportKindDetails) {
@@ -50,6 +70,11 @@ public class SportKindController {
         return updateSportKind;
     }
 
+    /**
+     *
+     * @param sportKindId
+     * @return
+     */
     @DeleteMapping("/sport-kinds/{id}")
     public ResponseEntity<?> deleteSportKind(@PathVariable(value = "id") Long sportKindId) {
         SportKind sportKind = sportKindRepository.findById(sportKindId)

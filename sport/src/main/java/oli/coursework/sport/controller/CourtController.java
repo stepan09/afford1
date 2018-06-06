@@ -22,22 +22,42 @@ public class CourtController {
     @Autowired
     private CourtRepository courtRepository;
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/courts")
     public List<Court> getAllCourts(){
         return courtRepository.findAll();
     }
 
+    /**
+     *
+     * @param court
+     * @return
+     */
     @PostMapping("/courts")
     public Court createCourt(@Valid @RequestBody Court court) {
         return courtRepository.save(court);
     }
 
+    /**
+     *
+     * @param courtId
+     * @return
+     */
     @GetMapping("/courts/{id}")
     public Court getCourtById(@PathVariable(value = "id") Long courtId) {
         return courtRepository.findById(courtId)
                 .orElseThrow(() -> new ResourceNotFoundException("Court", "id", courtId));
     }
 
+    /**
+     *
+     * @param courtId
+     * @param courtDetails
+     * @return
+     */
     @PutMapping("/courts/{id}")
     public Court updateCourt(@PathVariable(value = "id") Long courtId,
                               @Valid @RequestBody Court courtDetails) {
@@ -54,6 +74,11 @@ public class CourtController {
         return updateCourt;
     }
 
+    /**
+     *
+     * @param courtId
+     * @return
+     */
     @DeleteMapping("/courts/{id}")
     public ResponseEntity<?> deleteCourt(@PathVariable(value = "id") Long courtId) {
         Court court = courtRepository.findById(courtId)

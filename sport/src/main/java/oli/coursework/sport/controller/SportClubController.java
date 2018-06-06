@@ -22,22 +22,41 @@ public class SportClubController {
     @Autowired
     private SportClubRepository sportClubRepository;
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/sport-clubs")
     public List<SportClub> getAllSportClubs(){
         return sportClubRepository.findAll();
     }
 
+    /**
+     *
+     * @param sportClub
+     * @return
+     */
     @PostMapping("/sport-clubs")
     public SportClub createSportClub(@Valid @RequestBody SportClub sportClub) {
         return sportClubRepository.save(sportClub);
     }
 
-
+    /**
+     *
+     * @param sportClubId
+     * @return
+     */
     public SportClub getSportClubById(@PathVariable(value = "id") Long sportClubId) {
         return sportClubRepository.findById(sportClubId)
                 .orElseThrow(() -> new ResourceNotFoundException("Sport club", "id", sportClubId));
     }
 
+    /**
+     *
+     * @param sportClubId
+     * @param sportClubDetails
+     * @return
+     */
     @PutMapping("/sport-clubs/{id}")
     public SportClub updateSportClub(@PathVariable(value = "id") Long sportClubId,
                                 @Valid @RequestBody SportClub sportClubDetails) {
@@ -52,6 +71,11 @@ public class SportClubController {
         return updateSportClub;
     }
 
+    /**
+     *
+     * @param sportClubId
+     * @return
+     */
     @DeleteMapping("/sport-clubs/{id}")
     public ResponseEntity<?> deleteSportClub(@PathVariable(value = "id") Long sportClubId) {
         SportClub sportClub = sportClubRepository.findById(sportClubId)

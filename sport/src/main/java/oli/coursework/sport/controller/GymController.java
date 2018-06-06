@@ -22,22 +22,42 @@ public class GymController {
     @Autowired
     private GymRepository gymRepository;
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/gyms")
     public List<Gym> getAllGyms(){
         return gymRepository.findAll();
     }
 
+    /**
+     *
+     * @param gym
+     * @return
+     */
     @PostMapping("/gyms")
     public Gym createGym(@Valid @RequestBody Gym gym) {
         return gymRepository.save(gym);
     }
 
+    /**
+     *
+     * @param gymId
+     * @return
+     */
     @GetMapping("/gyms/{id}")
     public Gym getGymById(@PathVariable(value = "id") Long gymId) {
         return gymRepository.findById(gymId)
                 .orElseThrow(() -> new ResourceNotFoundException("Gym", "id", gymId));
     }
 
+    /**
+     *
+     * @param gymId
+     * @param gymDetails
+     * @return
+     */
     @PutMapping("/gyms/{id}")
     public Gym updateGym(@PathVariable(value = "id") Long gymId,
                          @Valid @RequestBody Gym gymDetails) {
@@ -53,6 +73,11 @@ public class GymController {
         return updateGym;
     }
 
+    /**
+     *
+     * @param gymId
+     * @return
+     */
     @DeleteMapping("/gyms/{id}")
     public ResponseEntity<?> deleteGym(@PathVariable(value = "id") Long gymId) {
         Gym gym = gymRepository.findById(gymId)

@@ -23,26 +23,50 @@ public class StadiumController {
     @Autowired
     private StadiumRepository stadiumRepository;
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/stadiums")
     public List<Stadium> getAllStadiums(){
         return stadiumRepository.findAll();
     }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/stadiums-treadmill")
     public List<Stadium> getAllStadiumsWithTreadmill(){
         return stadiumRepository.findAllByTreadmillTrue();
     }
 
+    /**
+     *
+     * @param capacity
+     * @return
+     */
     @GetMapping("/stadiums-greater/{capacity}")
     public List<Stadium> getAllStadiumsGreaterThan(@PathVariable(value = "capacity") Integer capacity){
         return stadiumRepository.findAllByCapacityGreaterThan(capacity);
     }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/stadiums-order-desc")
     public List<Stadium> getAllStadiumsOrderDescCapacity(){
         return stadiumRepository.findByOrderByCapacityDesc();
     }
 
+    /**
+     *
+     * @param sportKindId
+     * @param firstDate
+     * @param secondDate
+     * @return
+     */
     @GetMapping("/stadiums/{id}/{first-date}/{second-date}")
     public List <Stadium> getStadiumsBySportKindAndDate(@PathVariable(value = "id") Long sportKindId,
                                                         @PathVariable(value = "first-date")
@@ -53,11 +77,20 @@ public class StadiumController {
                 .findByCompetitions_SportKind_IdAndCompetitions_StartDateBetween(sportKindId, firstDate, secondDate);
     }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/stadiums-order-asc")
     public List<Stadium> getAllStadiumsOrderAscCapacity(){
         return stadiumRepository.findByOrderByCapacityAsc();
     }
 
+    /**
+     *
+     * @param stadium
+     * @return
+     */
     @PostMapping("/stadiums")
     public Stadium createStadium(@Valid @RequestBody Stadium stadium){
         return stadiumRepository.save(stadium);
@@ -68,6 +101,12 @@ public class StadiumController {
                 .orElseThrow(() -> new ResourceNotFoundException("Stadium", "id", stadiumId));
     }
 
+    /**
+     *
+     * @param stadiumId
+     * @param stadiumDetails
+     * @return
+     */
     @PutMapping("/stadiums/{id}")
     public Stadium updateStadium(@PathVariable(value = "id") Long stadiumId,
                              @Valid @RequestBody Stadium stadiumDetails) {
@@ -85,6 +124,11 @@ public class StadiumController {
         return updateStadium;
     }
 
+    /**
+     *
+     * @param stadiumId
+     * @return
+     */
     @DeleteMapping("/stadiums/{id}")
     public ResponseEntity<?> deleteStadium(@PathVariable(value = "id") Long stadiumId) {
         Stadium stadium = stadiumRepository.findById(stadiumId)

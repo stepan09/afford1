@@ -18,25 +18,50 @@ public class CoachController {
     @Autowired
     private CoachRepository coachRepository;
 
+    /**
+     *
+     * @param sportsmanId
+     * @return
+     */
     @GetMapping("/coaches-by-sportsman/{id}")
     public List<Coach> getCoachesBySportsmanId(@PathVariable(value = "id") Long sportsmanId){
         return coachRepository.findBySportsmen_SportsmanId(sportsmanId);
     }
 
+    /**
+     *
+     * @return
+     */
     @GetMapping("/coaches")
     public List<Coach> getAllCoaches() {return coachRepository.findAll();}
 
+    /**
+     *
+     * @param coach
+     * @return
+     */
     @PostMapping("/coaches")
     public Coach createCoach(@Valid @RequestBody Coach coach) {
         return coachRepository.save(coach);
     }
 
+    /**
+     *
+     * @param coachId
+     * @return
+     */
     @GetMapping("/coaches/{id}")
     public Coach getCoachById(@PathVariable(value = "id") Long coachId){
         return coachRepository.findById(coachId)
                 .orElseThrow(() -> new ResourceNotFoundException("Coach", "id", coachId));
     }
 
+    /**
+     *
+     * @param coachId
+     * @param coachDetails
+     * @return
+     */
     @PutMapping("/coaches/{id}")
     public Coach updateCoach(@PathVariable(value = "id") Long coachId,
                              @Valid @RequestBody Coach coachDetails) {
@@ -54,6 +79,11 @@ public class CoachController {
         return updateCoach;
     }
 
+    /**
+     *
+     * @param coachId
+     * @return
+     */
     @DeleteMapping("/coaches/{id}")
     public ResponseEntity<?> deleteCoach(@PathVariable(value = "id") Long coachId) {
         Coach coach = coachRepository.findById(coachId)
