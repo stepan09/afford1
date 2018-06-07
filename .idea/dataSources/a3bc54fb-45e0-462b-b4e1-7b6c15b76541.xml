@@ -10,7 +10,7 @@
     <schema id="2" parent="1" name="heroku_9d8fe5da8bd293e">
       <Current>1</Current>
       <Visible>1</Visible>
-      <Collation>utf8_general_ci</Collation>
+      <Collation>utf8mb4_unicode_ci</Collation>
     </schema>
     <schema id="3" parent="1" name="information_schema">
       <Collation>utf8_general_ci</Collation>
@@ -891,21 +891,51 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="223" parent="2" name="coach"/>
-    <table id="224" parent="2" name="coach_has_sportsman"/>
-    <table id="225" parent="2" name="competition"/>
-    <table id="226" parent="2" name="competition_has_court"/>
-    <table id="227" parent="2" name="competition_has_gym"/>
-    <table id="228" parent="2" name="competition_has_sportsman"/>
-    <table id="229" parent="2" name="competition_has_stadium"/>
-    <table id="230" parent="2" name="court"/>
-    <table id="231" parent="2" name="gym"/>
-    <table id="232" parent="2" name="kind_of_sport"/>
-    <table id="233" parent="2" name="organizer"/>
-    <table id="234" parent="2" name="sport_club"/>
-    <table id="235" parent="2" name="sportsman"/>
-    <table id="236" parent="2" name="sportsman_has_kind_of_sport"/>
-    <table id="237" parent="2" name="stadium"/>
+    <table id="223" parent="2" name="coach">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="224" parent="2" name="coach_has_sportsman">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="225" parent="2" name="competition">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="226" parent="2" name="competition_has_court">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="227" parent="2" name="competition_has_gym">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="228" parent="2" name="competition_has_sportsman">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="229" parent="2" name="competition_has_stadium">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="230" parent="2" name="court">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="231" parent="2" name="gym">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="232" parent="2" name="kind_of_sport">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="233" parent="2" name="organizer">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="234" parent="2" name="sport_club">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="235" parent="2" name="sportsman">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="236" parent="2" name="sportsman_has_kind_of_sport">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <table id="237" parent="2" name="stadium">
+      <Collation>utf8_general_ci</Collation>
+    </table>
     <column id="238" parent="223" name="coach_id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
