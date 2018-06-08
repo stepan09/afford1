@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.logging.Logger;
 
 //@CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -18,6 +19,7 @@ public class CoachController {
     @Autowired
     private CoachRepository coachRepository;
 
+    private static Logger log = Logger.getLogger(CoachController.class.getName());
     /**
      *
      * @param sportsmanId
@@ -68,6 +70,7 @@ public class CoachController {
         Coach coach = coachRepository.findById(coachId)
                 .orElseThrow(() -> new ResourceNotFoundException("Coach", "id", coachId));
 
+        log.info(coachDetails.getLastName());
         coach.setLastName(coachDetails.getLastName());
         coach.setFirstName(coachDetails.getFirstName());
         coach.setMiddleName(coachDetails.getMiddleName());
@@ -76,6 +79,7 @@ public class CoachController {
 
         Coach updateCoach = coachRepository.save(coach);
 
+        log.info(updateCoach.getLastName());
         return updateCoach;
     }
 
