@@ -12,6 +12,38 @@
     </div>
     <br>
 
+    <b-tabs>
+      <b-tab title="Запит 20" active>
+        <br>
+        <p> За видом спорту і датами</p>
+        <div class="row">
+          <div class="col-md-3">
+            <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                           v-model="sportKindId"
+                           placeholder="Види спорту">
+              <option disabled slot="first" :value="null">Види спорту</option>
+              <option v-for="sportKind in sportKinds" :value="sportKind.id">
+                {{ sportKind.name }}
+              </option>
+            </b-form-select>
+          </div>
+          <div class="col-md-2">
+            <input type="date" v-model="firstDate" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <input type="date" v-model="secondDate" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-success" @click="getCourtsByKindOfSportAndDates(sportKindId, firstDate, secondDate)">
+              Пошук
+            </button>
+          </div>
+        </div>
+      </b-tab>
+      <b-tab title="Усі" @click="fetchCourts" active>
+        <br>
+      </b-tab>
+    </b-tabs>
     <b-card  v-for="court in filteredList" :key="court.courtId" v-bind:data="court" :title="court.name"
              img-src="../static/img/court.jpg"
              img-alt="Image"
@@ -139,14 +171,29 @@
         courts: [],
         formAdd: {},
         showModal: false,
-        showUpdateModal: false
+        showUpdateModal: false,
+        sportKindId: {},
+        firstDate: {},
+        secondDate: {},
+        sportKinds: [],
       }),
       created() {
         this.fetchCourts();
+        this.fetchSportKinds();
       },
       methods: {
         fetchCourts() {
           axios.get('/api/courts').then((response) => {
+            this.courts = response.data;
+          });
+        },
+        fetchSportKinds() {
+          axios.get('/api/sport-kinds').then((response) => {
+            this.sportKinds = response.data;
+          })
+        },
+        getCourtsByKindOfSportAndDates(sportKindId, firstDate, secondDate) {
+          axios.get('/api/courts/' + sportKindId + '/' + firstDate + '/' + secondDate).then((response) => {
             this.courts = response.data;
           });
         },

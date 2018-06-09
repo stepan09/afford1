@@ -4,31 +4,37 @@
         <div class="col-md-8">
           <input type="text" v-model="search" class="form-control" placeholder="Пошук">
         </div>
-        <div class="col-md-4">
+        <div class="col-md-1">
           <button type="button" @click="showModal = true" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
             Додати
           </button>
-        </div>
-      </div>
-      <br>
-
-      <div class="row">
-        <div class="col-md-3">
-          <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                         v-model="competitionId"
-                         placeholder="Спортсмени">
-            <option v-for="competition in competitions" :value="competition.competitionId">
-              {{ competition.name}}
-            </option>
-          </b-form-select>
-        </div>
-        <div class="col-md-1">
-          <button class="btn btn-info" @click="getOrganizerByCompetition(competitionId)">Пошук</button>
         </div>
         <div class="col-md-1">
           <button class="btn btn-success" @click="fetchOrganizers">Усі</button>
         </div>
       </div>
+      <br>
+      <b-tabs>
+        <b-tab title="Запит 14" active>
+          <br>
+          <div class="row">
+            <div class="col-md-3">
+              <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                             v-model="competitionId"
+                             placeholder="Спортсмени">
+                <option v-for="competition in competitions" :value="competition.competitionId">
+                  {{ competition.name}}
+                </option>
+              </b-form-select>
+            </div>
+            <div class="col-md-1">
+              <button class="btn btn-info" @click="getOrganizerByCompetition(competitionId)">Пошук</button>
+            </div>
+          </div>
+        </b-tab>
+        <b-tab title="Усі" @click="fetchOrganizers" active>
+        </b-tab>
+      </b-tabs>
 
       <b-card  v-for="organizer in filteredList" :key="organizer.organizerId" v-bind:data="organizer" :title="organizer.lastName"
                img-src="../static/img/organizer.jpg"
@@ -80,7 +86,7 @@
                     <button class="btn btn-default" @click="showModal=false">Скасувати</button>
                     <button v-if="formAdd.lastName !== '' && formAdd.firstName !== ''"
                             class="btn btn-success" @click="addOrganizer">Зберегти</button>
-                    <button class="btn btn-success" disabled>Зберегти</button>
+                    <button v-else class="btn btn-success" disabled>Зберегти</button>
 
                   </div>
                 </div>
@@ -123,7 +129,7 @@
                     <button class="btn btn-default" @click="showUpdateModal=false">Скасувати</button>
                     <button v-if="formAdd.lastName !== '' && formAdd.firstName !== ''"
                             class="btn btn-success" @click="updateOrganizer(formAdd)">Зберегти</button>
-                    <button class="btn btn-success" disabled>Зберегти</button>
+                    <button v-else class="btn btn-success" disabled>Зберегти</button>
 
                   </div>
                 </div>

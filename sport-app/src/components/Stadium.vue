@@ -16,56 +16,80 @@
       </div>
     </div>
     <br>
-
-    <div class="row">
-      <div class="col-md-3">
-        <b-form-input v-model="capacity" type="number" class="form-control"  step="1000"></b-form-input>
-      </div>
-      <div class="col-md-1">
-        <button @click="getStadiumWithCapacityGreaterThan" class="btn btn-success">
-          Пошук
-        </button>
-      </div>
-      <div class="col-md-3">
-        <button @click="getStadiumWithTreadmill" class="btn btn-success">
-          З біговими доріжками
-        </button>
-      </div>
-      <div class="col-md-2">
-        <button @click="getStadiumOrderByCapacityDesc" class="btn btn-success">
-          Сортувати
-        </button>
-      </div>
-      <div class="col-md-2">
+    <b-tabs>
+      <b-tab title="Запит 15" active>
+        <br>
+        <p>Пошук по вмістимості ></p>
+        <div class="row">
+          <div class="col-md-3">
+            <b-form-input v-model="capacity" type="number" class="form-control"  step="1000"></b-form-input>
+          </div>
+          <div class="col-md-1">
+            <button @click="getStadiumWithCapacityGreaterThan" class="btn btn-success">
+              Пошук
+            </button>
+          </div>
+        </div>
+      </b-tab>
+      <b-tab title="Запит 16" >
+        <br>
+        <div>
+          <button @click="getStadiumWithTreadmill" class="btn btn-success">
+            З біговими доріжками
+          </button>
+        </div>
+      </b-tab>
+      <b-tab title="Запит 17" >
+        <br>
+        <p>Сортувати за зростанням вмістимості</p>
         <button @click="getStadiumOrderByCapacityAsc" class="btn btn-success">
           Сортувати
         </button>
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-md-3">
-        <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                       v-model="sportKindId"
-                       placeholder="Види спорту">
-          <option disabled slot="first" :value="null">Види спорту</option>
-          <option v-for="sportKind in sportKinds" :value="sportKind.id">
-            {{ sportKind.name }}
-          </option>
-        </b-form-select>
-      </div>
-      <div class="col-md-2">
-        <input type="date" v-model="firstDate" class="form-control">
-      </div>
-      <div class="col-md-2">
-        <input type="date" v-model="secondDate" class="form-control">
-      </div>
-      <div class="col-md-2">
-        <button class="btn btn-success" @click="getStadiumsByKindOfSportAndDates(sportKindId, firstDate, secondDate)">
-          Пошук
+      </b-tab>
+      <b-tab title="Запит 18" >
+        <br>
+        <p>Сортувати за спаданням вмістимості</p>
+        <button @click="getStadiumOrderByCapacityDesc" class="btn btn-success">
+          Сортувати
         </button>
-      </div>
-    </div>
+      </b-tab>
+      <b-tab title="Запит 19">
+        <br>
+        <p> За видом спорту і датами</p>
+        <div class="row">
+          <div class="col-md-2">
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-3">
+            <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                           v-model="sportKindId"
+                           placeholder="Види спорту">
+              <option disabled slot="first" :value="null">Види спорту</option>
+              <option v-for="sportKind in sportKinds" :value="sportKind.id">
+                {{ sportKind.name }}
+              </option>
+            </b-form-select>
+          </div>
+          <div class="col-md-2">
+            <input type="date" v-model="firstDate" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <input type="date" v-model="secondDate" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-success" @click="getStadiumsByKindOfSportAndDates(sportKindId, firstDate, secondDate)">
+              Пошук
+            </button>
+          </div>
+        </div>
+      </b-tab>
+      <b-tab title="Усі" @click="fetchStadiums" active>
+        <br>
+      </b-tab>
+    </b-tabs>
+
 
     <b-card  v-for="stadium in filteredList" :key="stadium.id" v-bind:data="stadium" :title="stadium.name"
              img-src="../static/img/stadium.jpg"
@@ -131,7 +155,7 @@
                                 formAdd.address !== '' && formAdd.capacity !== undefined &&
                                 formAdd.treadmill !== undefined"
                           class="btn btn-success" @click="addStadium" >Зберегти</button>
-                  <button class="btn btn-success" disabled>Зберегти</button>
+                  <button v-else class="btn btn-success" disabled>Зберегти</button>
 
                 </div>
               </div>
@@ -188,7 +212,7 @@
                                 formAdd.address !== '' && formAdd.capacity !== undefined &&
                                 formAdd.treadmill !== undefined"
                           class="btn btn-success" @click="updateStadium(formAdd)" >Зберегти</button>
-                  <button class="btn btn-success" disabled>Зберегти</button>
+                  <button v-else class="btn btn-success" disabled>Зберегти</button>
                 </div>
               </div>
             </div>

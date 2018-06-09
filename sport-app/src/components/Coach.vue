@@ -4,23 +4,21 @@
       <div class="col-md-8">
         <input type="text" v-model="search" class="form-control" placeholder="Пошук">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-1">
         <button type="button" @click="showModal = true" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
            Додати
         </button>
       </div>
+      <div class="col-md-1">
+        <button class="btn btn-success" @click="fetchCoaches">Усі</button>
+      </div>
     </div>
     <br>
-    <div id="example-3">
-      <button class="btn btn-success" @click="show = !show">
-        Toggle render
-      </button>
-      <transition
-        name="custom-classes-transition"
-        enter-active-class="animated tada"
-        leave-active-class="animated bounceOutRight"
-      >
-        <div class="row" v-if="show">
+    <b-tabs>
+      <b-tab title="Запит 1" active>
+        <br>
+        <p>Тренери за спортсменом</p>
+        <div class="row">
           <div class="col-md-3">
             <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
                            v-model="sportsmanId"
@@ -33,13 +31,12 @@
           <div class="col-md-1">
             <button class="btn btn-info" @click="getCoachesBySportsmanId(sportsmanId)">Пошук</button>
           </div>
-          <div class="col-md-1">
-            <button class="btn btn-success" @click="fetchCoaches">Усі</button>
-          </div>
         </div>
-
-      </transition>
-    </div>
+      </b-tab>
+      <b-tab title="Усі" @click="fetchCoaches" active>
+        <br>
+      </b-tab>
+    </b-tabs>
     <!-- Modal -->
     <div v-if="showModal">
       <transition name="modal">
@@ -115,26 +112,22 @@
 
                   <div class="form-group">
                     <label>Прізвище</label>
-                    <input v-model="formAdd.lastName" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <input v-model="formAdd.lastName" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
                   </div>
 
                   <div class="form-group">
                     <label>Ім'я</label>
-                    <input v-model="formAdd.firstName" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small  class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <input v-model="formAdd.firstName" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
                   </div>
 
                   <div class="form-group">
                     <label>По батькові</label>
-                    <input v-model="formAdd.middleName" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
-                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <input v-model="formAdd.middleName" type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
                   </div>
 
                   <div class="form-group">
                     <label>Дата народження</label>
                     <input v-model="formAdd.birthDate" type="date" class="form-control"  aria-describedby="emailHelp" placeholder="Enter email">
-                    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
                   </div>
 
                   <div class="form-group">
@@ -194,7 +187,6 @@
       showModal: false,
       showUpdateModal: false,
       formAdd: {},
-      show: false,
     }),
     created() {
       this.fetchCoaches();
@@ -262,7 +254,7 @@
   }
 
   .modal-mask {
-    position: fixed;
+    position: absolute;
     z-index: 9998;
     top: 0;
     left: 0;
@@ -277,6 +269,10 @@
   .modal-wrapper {
     display: table-cell;
     vertical-align: middle;
+  }
+
+  #mar {
+    margin-top: 10px;
   }
 
 

@@ -8,10 +8,12 @@ import oli.coursework.sport.exception.ResourceNotFoundException;
 import oli.coursework.sport.model.Court;
 import oli.coursework.sport.repository.CourtRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 
 //@CrossOrigin(origins = "http://localhost:4200")
@@ -50,6 +52,16 @@ public class CourtController {
     public Court getCourtById(@PathVariable(value = "id") Long courtId) {
         return courtRepository.findById(courtId)
                 .orElseThrow(() -> new ResourceNotFoundException("Court", "id", courtId));
+    }
+
+    @GetMapping("/courts/{id}/{first-date}/{second-date}")
+    public List <Court> getStadiumsBySportKindAndDate(@PathVariable(value = "id") Long sportKindId,
+                                                        @PathVariable(value = "first-date")
+                                                        @DateTimeFormat(pattern = "yyyy-MM-dd") Date firstDate,
+                                                        @PathVariable(value = "second-date")
+                                                        @DateTimeFormat(pattern = "yyyy-MM-dd") Date secondDate) {
+        return courtRepository
+                .findByCompetitions_SportKind_IdAndCompetitions_StartDateBetween(sportKindId, firstDate, secondDate);
     }
 
     /**

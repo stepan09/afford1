@@ -4,163 +4,192 @@
     <div class="col-md-8">
       <input type="text" v-model="search" class="form-control" placeholder="Пошук">
     </div>
-    <div class="col-md-4">
+    <div class="col-md-1">
       <button type="button" @click="showModal = true" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
         Додати
       </button>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-md-2">
-      <input type="date" v-model="firstDate" class="form-control">
-    </div>
-    <div class="col-md-2">
-      <input type="date" v-model="secondDate" class="form-control">
-    </div>
-    <div class="col-md-2">
-      <button class="btn btn-success" @click="getCompetitionsByDates(firstDate, secondDate)">
-        Пошук
-      </button>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-md-3">
-      <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                     v-model="organizerId"
-                     placeholder="Організатори">
-        <option disabled slot="first" :value="null">Організатори</option>
-        <option v-for="organizer in organizers" :value="organizer.organizerId">
-          {{ organizer.lastName}} {{organizer.firstName}}
-        </option>
-      </b-form-select>
-    </div>
-    <div class="col-md-1">
-      <button class="btn btn-info" @click="getCompetitionByOrganizerId(organizerId)">Пошук</button>
-    </div>
-  <div class="col-md-3">
-      <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                     v-model="sportKindId"
-                     placeholder="Види спорту">
-        <option disabled slot="first" :value="null">Види спорту</option>
-        <option v-for="sportKind in sportKinds" :value="sportKind.id">
-          {{ sportKind.name }}
-        </option>
-      </b-form-select>
-    </div>
-    <div class="col-md-1">
-      <button class="btn btn-info" @click="getCompetitionBySportKindId(sportKindId)">Пошук</button>
     </div>
     <div class="col-md-1">
       <button class="btn btn-success" @click="fetchCompetitions">Усі</button>
     </div>
   </div>
-  <p>Перелік змагань за видом спорту і спортзалом</p>
-  <div class="row">
-    <div class="col-md-3">
-      <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                     v-model="sportKindId1"
-                     placeholder="Види спорту">
-        <option disabled slot="first" :value="null">Види спорту</option>
-        <option v-for="sportKind in sportKinds" :value="sportKind.id">
-          {{ sportKind.name }}
-        </option>
-      </b-form-select>
-    </div>
-    <div class="col-md-3">
-      <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                     v-model="gymId"
-                     placeholder="Спортзали">
-        <option disabled slot="first" :value="null">Спортзали</option>
-        <option v-for="gym in gyms" :value="gym.gymId">
-          {{ gym.name }}
-        </option>
-      </b-form-select>
-    </div>
-    <div class="col-md-1">
-      <button class="btn btn-info" @click="getCompetitionsBySportKindAndGym(sportKindId1, gymId)">Пошук</button>
-    </div>
-  </div>
-
-  <p>Перелік змагань за видом спорту і стадіоном</p>
-  <div class="row">
-    <div class="col-md-3">
-      <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                     v-model="sportKindId2"
-                     placeholder="Види спорту">
-        <option disabled slot="first" :value="null">Види спорту</option>
-        <option v-for="sportKind in sportKinds" :value="sportKind.id">
-          {{ sportKind.name }}
-        </option>
-      </b-form-select>
-    </div>
-    <div class="col-md-3">
-      <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                     v-model="stadiumId"
-                     placeholder="Спортзали">
-        <option disabled slot="first" :value="null">Спортзали</option>
-        <option v-for="stadium in stadiums" :value="stadium.stadiumId">
-          {{ stadium.name }}
-        </option>
-      </b-form-select>
-    </div>
-    <div class="col-md-1">
-      <button class="btn btn-info" @click="getCompetitionsBySportKindAndStadium(sportKindId2, stadiumId)">Пошук</button>
-    </div>
-  </div>
-  <p>Перелік змагань за видом спорту і тенісним кортом</p>
-  <div class="row">
-    <div class="col-md-3">
-      <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                     v-model="sportKindId3"
-                     placeholder="Види спорту">
-        <option disabled slot="first" :value="null">Види спорту</option>
-        <option v-for="sportKind in sportKinds" :value="sportKind.id">
-          {{ sportKind.name }}
-        </option>
-      </b-form-select>
-    </div>
-    <div class="col-md-3">
-      <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                     v-model="courtId"
-                     placeholder="Спортзали">
-        <option disabled slot="first" :value="null">Тенісні корти</option>
-        <option v-for="court in courts" :value="court.courtId">
-          {{ court.name }}
-        </option>
-      </b-form-select>
-    </div>
-    <div class="col-md-1">
-      <button class="btn btn-info" @click="getCompetitionsBySportKindAndCourt(sportKindId3, courtId)">Пошук</button>
-    </div>
-  </div>
-  <p>Перелік змагань за видом спорту і організатором</p>
-  <div class="row">
-    <div class="col-md-3">
-      <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                     v-model="sportKindId4"
-                     placeholder="Види спорту">
-        <option disabled slot="first" :value="null">Види спорту</option>
-        <option v-for="sportKind in sportKinds" :value="sportKind.id">
-          {{ sportKind.name }}
-        </option>
-      </b-form-select>
-    </div>
-    <div class="col-md-3">
-      <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                     v-model="organizerId1"
-                     placeholder="Організатори">
-        <option disabled slot="first" :value="null">Тенісні корти</option>
-        <option v-for="organizer in organizers" :value="organizer.organizerId">
-          {{ organizer.lastName }} {{ organizer.firstName }}
-        </option>
-      </b-form-select>
-    </div>
-    <div class="col-md-1">
-      <button class="btn btn-info" @click="getCompetitionsBySportKindAndOrganizer(sportKindId4, organizerId1)">Пошук</button>
-    </div>
-  </div>
+  <br>
+  <b-tabs>
+    <b-tab title="Запит 7" active>
+      <br>
+      <p>Змагання, які проходили в заданий проміжок (по стартовій даті)</p>
+      <div class="row">
+        <div class="col-md-2">
+          <input type="date" v-model="firstDate" class="form-control">
+        </div>
+        <div class="col-md-2">
+          <input type="date" v-model="secondDate" class="form-control">
+        </div>
+        <div class="col-md-2">
+          <button class="btn btn-success" @click="getCompetitionsByDates(firstDate, secondDate)">
+            Пошук
+          </button>
+        </div>
+      </div>
+    </b-tab>
+    <b-tab title="Запит 8" >
+      <br>
+      <p>Змагання за організатором</p>
+      <div class="row">
+        <div class="col-md-3">
+          <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                         v-model="organizerId"
+                         placeholder="Організатори">
+            <option disabled slot="first" :value="null">Організатори</option>
+            <option v-for="organizer in organizers" :value="organizer.organizerId">
+              {{ organizer.lastName}} {{organizer.firstName}}
+            </option>
+          </b-form-select>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-info" @click="getCompetitionByOrganizerId(organizerId)">Пошук</button>
+        </div>
+      </div>
+    </b-tab>
+    <b-tab title="Запит 9" >
+      <br>
+      <p>Змагання за видом спорту</p>
+      <div class="row">
+        <div class="col-md-3">
+          <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                         v-model="sportKindId"
+                         placeholder="Види спорту">
+            <option disabled slot="first" :value="null">Види спорту</option>
+            <option v-for="sportKind in sportKinds" :value="sportKind.id">
+              {{ sportKind.name }}
+            </option>
+          </b-form-select>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-info" @click="getCompetitionBySportKindId(sportKindId)">Пошук</button>
+        </div>
+      </div>
+    </b-tab>
+    <b-tab title="Запит 10" >
+      <br>
+      <p>Перелік змагань за видом спорту і спортзалом</p>
+      <div class="row">
+        <div class="col-md-3">
+          <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                         v-model="sportKindId1"
+                         placeholder="Види спорту">
+            <option disabled slot="first" :value="null">Види спорту</option>
+            <option v-for="sportKind in sportKinds" :value="sportKind.id">
+              {{ sportKind.name }}
+            </option>
+          </b-form-select>
+        </div>
+        <div class="col-md-3">
+          <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                         v-model="gymId"
+                         placeholder="Спортзали">
+            <option disabled slot="first" :value="null">Спортзали</option>
+            <option v-for="gym in gyms" :value="gym.gymId">
+              {{ gym.name }}
+            </option>
+          </b-form-select>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-info" @click="getCompetitionsBySportKindAndGym(sportKindId1, gymId)">Пошук</button>
+        </div>
+      </div>
+    </b-tab>
+    <b-tab title="Запит 11" >
+      <br>
+      <p>Перелік змагань за видом спорту і стадіоном</p>
+      <div class="row">
+        <div class="col-md-3">
+          <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                         v-model="sportKindId2"
+                         placeholder="Види спорту">
+            <option disabled slot="first" :value="null">Види спорту</option>
+            <option v-for="sportKind in sportKinds" :value="sportKind.id">
+              {{ sportKind.name }}
+            </option>
+          </b-form-select>
+        </div>
+        <div class="col-md-3">
+          <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                         v-model="stadiumId"
+                         placeholder="Спортзали">
+            <option disabled slot="first" :value="null">Спортзали</option>
+            <option v-for="stadium in stadiums" :value="stadium.stadiumId">
+              {{ stadium.name }}
+            </option>
+          </b-form-select>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-info" @click="getCompetitionsBySportKindAndStadium(sportKindId2, stadiumId)">Пошук</button>
+        </div>
+      </div>
+    </b-tab>
+    <b-tab title="Запит 12" >
+      <br>
+      <p>Перелік змагань за видом спорту і тенісним кортом</p>
+      <div class="row">
+        <div class="col-md-3">
+          <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                         v-model="sportKindId3"
+                         placeholder="Види спорту">
+            <option disabled slot="first" :value="null">Види спорту</option>
+            <option v-for="sportKind in sportKinds" :value="sportKind.id">
+              {{ sportKind.name }}
+            </option>
+          </b-form-select>
+        </div>
+        <div class="col-md-3">
+          <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                         v-model="courtId"
+                         placeholder="Спортзали">
+            <option disabled slot="first" :value="null">Тенісні корти</option>
+            <option v-for="court in courts" :value="court.courtId">
+              {{ court.name }}
+            </option>
+          </b-form-select>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-info" @click="getCompetitionsBySportKindAndCourt(sportKindId3, courtId)">Пошук</button>
+        </div>
+      </div>
+    </b-tab>
+    <b-tab title="Запит 13" >
+      <br>
+      <p>Перелік змагань за видом спорту і організатором</p>
+      <div class="row">
+        <div class="col-md-3">
+          <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                         v-model="sportKindId4"
+                         placeholder="Види спорту">
+            <option disabled slot="first" :value="null">Види спорту</option>
+            <option v-for="sportKind in sportKinds" :value="sportKind.id">
+              {{ sportKind.name }}
+            </option>
+          </b-form-select>
+        </div>
+        <div class="col-md-3">
+          <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                         v-model="organizerId1"
+                         placeholder="Організатори">
+            <option disabled slot="first" :value="null">Тенісні корти</option>
+            <option v-for="organizer in organizers" :value="organizer.organizerId">
+              {{ organizer.lastName }} {{ organizer.firstName }}
+            </option>
+          </b-form-select>
+        </div>
+        <div class="col-md-1">
+          <button class="btn btn-info" @click="getCompetitionsBySportKindAndOrganizer(sportKindId4, organizerId1)">Пошук</button>
+        </div>
+      </div>
+    </b-tab>
+    <b-tab title="Усі" @click="fetchCompetitions" active>
+    </b-tab>
+  </b-tabs>
+  <br>
 
 
   <b-card  v-for="competition in filteredList" :key="competition.competitionId" v-bind:data="competition" :title="competition.name"

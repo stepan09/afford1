@@ -4,82 +4,102 @@
       <div class="col-md-8">
         <input type="text" v-model="search" class="form-control" placeholder="Пошук">
       </div>
-      <div class="col-md-4">
+      <div class="col-md-1">
         <button type="button" @click="showModal = true" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
           Додати
         </button>
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-md-3">
-        <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                       v-model="coachId"
-                       placeholder="Тренери">
-          <option disabled slot="first" :value="null">Тренери</option>
-          <option v-for="coach in coaches" :value="coach.coachId">
-            {{ coach.lastName}} {{coach.firstName}}
-          </option>
-        </b-form-select>
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-info" @click="getSportsmenByCoachId(coachId)">Пошук</button>
-      </div>
-      <div class="col-md-3">
-        <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                       v-model="sportKindId"
-                       placeholder="Вид спорту">
-          <option disabled slot="first" :value="null">Види спорту</option>
-          <option v-for="sportKind in sportKinds" :value="sportKind.id">
-            {{ sportKind.name }}
-          </option>
-        </b-form-select>
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-info" @click="getSportsmenBySportKindId(sportKindId)">Пошук</button>
       </div>
       <div class="col-md-1">
         <button class="btn btn-success" @click="fetchSportsmen">Усі</button>
       </div>
     </div>
     <br>
-    <div class="row">
-      <div class="col-md-3">
-        <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
-                       v-model="sportClubId"
-                       placeholder="Вид спорту">
-          <option disabled slot="first" :value="null">Клуби</option>
-          <option v-for="sportClub in sportClubs" :value="sportClub.sportClubId">
-            {{ sportClub.name }}
-          </option>
-        </b-form-select>
-      </div>
-      <div class="col-md-1">
-        <button class="btn btn-info" @click="getSportsmenBySportClubId(sportClubId)">Пошук</button>
-      </div>
-    </div>
+    <b-tabs >
+      <b-tab title="Запит 2" active>
+        <br> Спортсмени за тренером
+        <div class="row">
+          <div class="col-md-3">
+            <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                           v-model="coachId"
+                           placeholder="Тренери">
+              <option disabled slot="first" :value="null">Тренери</option>
+              <option v-for="coach in coaches" :value="coach.coachId">
+                {{ coach.lastName}} {{coach.firstName}}
+              </option>
+            </b-form-select>
+          </div>
+          <div class="col-md-1">
+            <button class="btn btn-info" @click="getSportsmenByCoachId(coachId)">Пошук</button>
+          </div>
+        </div>
+      </b-tab>
+      <b-tab title="Запит 3" >
+        <br> Спортсмени за видом спорту
+        <div class="row">
+          <div class="col-md-3">
+            <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                           v-model="sportKindId"
+                           placeholder="Вид спорту">
+              <option disabled slot="first" :value="null">Види спорту</option>
+              <option v-for="sportKind in sportKinds" :value="sportKind.id">
+                {{ sportKind.name }}
+              </option>
+            </b-form-select>
+          </div>
+          <div class="col-md-1">
+            <button class="btn btn-info" @click="getSportsmenBySportKindId(sportKindId)">Пошук</button>
+          </div>
+        </div>
+      </b-tab>
+      <b-tab title="Запит 4">
+        <br> Спортсмени за спортивним клубом
+        <div class="row">
+          <div class="col-md-3">
+            <b-form-select class="mb-2 mr-sm-2 mb-sm-0"
+                           v-model="sportClubId"
+                           placeholder="Вид спорту">
+              <option disabled slot="first" :value="null">Клуби</option>
+              <option v-for="sportClub in sportClubs" :value="sportClub.sportClubId">
+                {{ sportClub.name }}
+              </option>
+            </b-form-select>
+          </div>
+          <div class="col-md-1">
+            <button class="btn btn-info" @click="getSportsmenBySportClubId(sportClubId)">Пошук</button>
+          </div>
+        </div>
+      </b-tab>
+      <b-tab title="Запит 5">
+        <br>
+        <div class="row">
+          <div class="col-md-4">
+            <button class="btn btn-success" @click="getOrderSportsmen">
+              Сортувати за датою народження
+            </button>
+          </div>
+        </div>
+      </b-tab>
+      <b-tab title="Запит 6">
+        <br>Спортсмени які не брали участь в змаганнях в заданому діапазоні (по стартовій даті)
+        <div class="row">
+          <div class="col-md-2">
+            <input type="date" v-model="firstDate" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <input type="date" v-model="secondDate" class="form-control">
+          </div>
+          <div class="col-md-2">
+            <button @click="getSportsmenNotBetweenDate" class="btn btn-info">
+              Пошук
+            </button>
+          </div>
+        </div>
+      </b-tab>
+      <b-tab title="Усі" @click="fetchSportsmen" active>
+
+      </b-tab>
+    </b-tabs>
     <br>
-    <div class="row">
-      <div class="col-md-4">
-        <button class="btn btn-success" @click="getOrderSportsmen">
-          Сортувати за датою народження
-        </button>
-      </div>
-    </div>
-    <br>
-    <div class="row">
-      <div class="col-md-3">
-        <input type="date" v-model="firstDate" class="form-control">
-      </div>
-      <div class="col-md-3">
-        <input type="date" v-model="secondDate" class="form-control">
-      </div>
-      <div class="col-md-2">
-        <button @click="getSportsmenNotBetweenDate" class="btn btn-dark">
-          Пошук
-        </button>
-      </div>
-    </div>
 
 
     <!-- Modal -->
@@ -249,7 +269,8 @@
         showUpdateModal: false,
         formAdd: {},
         firstDate: {},
-        secondDate: {}
+        secondDate: {},
+        show: false,
       }),
       created() {
         this.fetchSportsmen();
@@ -363,5 +384,9 @@
   .modal-wrapper {
     display: table-cell;
     vertical-align: middle;
+  }
+
+  #mar {
+    margin-top: 10px;
   }
 </style>
