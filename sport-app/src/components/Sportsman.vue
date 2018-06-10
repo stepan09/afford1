@@ -146,6 +146,16 @@
                       </option>
                     </select>
                   </div>
+
+                  <div class="form-group">
+                    <label class="my-1 mr-2">Види спорту</label>
+                    <select class="custom-select my-1 mr-sm-2" v-model="formAdd.sportKinds" multiple>
+                      <option v-for="sportKind in sportKinds" :value="sportKind">
+                        {{sportKind.name}}
+                      </option>
+                    </select>
+                  </div>
+
                   <button class="btn btn-default" @click="showModal=false">Скасувати</button>
                   <button v-if="formAdd.lastName !== '' && formAdd.firstName !== '' &&
                                 formAdd.middleName !== '' && formAdd.birthDate !== undefined &&
